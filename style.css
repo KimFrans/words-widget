@@ -4,3 +4,7 @@
     /* background-color: cornflowerblue; */
 /* } */ 
 
+.longerThan5{
+    display: none;
+}
+
