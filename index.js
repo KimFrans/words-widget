@@ -11,8 +11,7 @@ let wordsArray = []
 
 function getWords() {
     const sentence = getSentence.value
-    console.log(sentence);
-
+    // console.log(sentence);
 
     wordsArray = sentence.trim().split(" ");
     // console.log(wordsArray);
@@ -20,48 +19,34 @@ function getWords() {
     const highlightedSentence = wordsArray.map(word => {
         if (word.length > 4) 
         { return `<mark>${word}</mark>` }
-        
             return word 
-        
     })
-
-    console.log(highlightedSentence);
+    // console.log(highlightedSentence);
     
     let newSentence = ""
     for(i=0; i<highlightedSentence.length; i++){
-        newSentence+= highlightedSentence[i] + " "
+        newSentence+= highlightedSentence[i] + " " 
     }
-    display.innerHTML = newSentence
-
+    
+    //word Count display
     let wordCount = sentence.split(" ").length
     // console.log(wordCount);
     count.innerHTML = wordCount
 
-    var sentenceSplit = sentence.split(' ');
-  var longestWord = 0;
-  let longestInString = ""
-  for(var i = 0; i < sentenceSplit.length; i++){
-    if(sentenceSplit[i].length > longestWord){
-	longestWord = sentenceSplit[i].length;
-    longestInString =  sentenceSplit[i]
-     }
-  }
-
-  console.log(longestInString);
-  longest.innerHTML = longestInString
-  return longestInString;
-
+    //Longest word
+    let sentenceSplit = sentence.split(' ');
+    let longestWord = 0;
+    let longestInString = ""
+    for(var i = 0; i < sentenceSplit.length; i++){
+        if(sentenceSplit[i].length > longestWord){
+	        longestWord = sentenceSplit[i].length;
+            longestInString = sentenceSplit[i];
+        }
+    }
+    longest.innerHTML = `<markLongest>${longestInString}</markLongest>`;
 
     
-}
-analyseBtn.addEventListener('click', getWords)
-
-function hideWords(){
-    const sentence = getSentence.value
-    // console.log(sentence);
-
-    wordsArray = sentence.trim().split(" ");
-
+    //Checkbox
     if(checkBox.checked === true){
         const wordsLongerThan5 = wordsArray.map(word => {
             if (word.length > 5) {
@@ -70,12 +55,41 @@ function hideWords(){
             
         })
         let joinedArray = wordsLongerThan5.join(" ")
-        lessthan5.innerHTML = joinedArray 
+        // lessthan5.innerHTML = joinedArray 
+        display.innerHTML = " "
+        lessthan5.innerHTML = joinedArray
     
     }else {
         lessthan5.innerHTML = ""
+        display.innerHTML = newSentence
     }
 
+    
 }
-checkBox.addEventListener('click', hideWords)
+analyseBtn.addEventListener('click', getWords)
+
+// function hideWords(){
+//     const sentence = getSentence.value
+//     // console.log(sentence);
+
+//     wordsArray = sentence.trim().split(" ");
+
+//     if(checkBox.checked === true){
+//         const wordsLongerThan5 = wordsArray.map(word => {
+//             if (word.length > 5) {
+//                 return word
+//             }
+            
+//         })
+//         let joinedArray = wordsLongerThan5.join(" ")
+//         // lessthan5.innerHTML = joinedArray 
+//         display.innerHTML = joinedArray
+    
+//     }else {
+//         // lessthan5.innerHTML = ""
+//         display.innerHTML = ""
+//     }
+
+// }
+// checkBox.addEventListener('click', hideWords)
 

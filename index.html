@@ -13,52 +13,26 @@
     <div class="container">
         <h1>Words widget</h1>
         <div class="row">
-            <div class="col-12">
-                <p>Please enter a sentence</p>
-                <input type="text" placeholder="enter a senternce.." class="input" onfocus="this.value=''">
+            <div class="col-6">
+                <h4>Please enter a sentence</h4>
+                <!-- <input type="text" placeholder="enter a senternce.." class="input" onfocus="this.value=''"> -->
+                <textarea class="input" placeholder="enter a senternce.." onfocus="this.value=''" cols="30" rows="5"></textarea>
                 <button class="analyse">Analyse Sentence</button>
+                <div class="sentenceDisplay"></div>
+                <div class="lessthan5"> </div>
+                <input type="checkbox" class="hide" value="" onclick="getWords()"> Hide all words shorter than 5 characters
             </div>
             <div class="col-6">
-            </div>
-
-        </div>
-        <div class="row">
-            <div class="col-12">
-                <h4>Word Count: <div class="count"> </div></h4>
-            </div>
-
-        </div>
-
-        
-        <div class="row">
-            <div class="col-12">
-                <div class="check">
-                    <input type="checkbox" class="hide" value="" onclick="hideWords()"> Hide all words shorter than 5 characters
-                </div>
-            </div>
-            <div class="col-12">
-                <div class="lessthan5"> </div>
-                <p id="text" style="display:none" class="longerThan5"> </p>
-            </div>
-            
-        </div>
-        
-        <div class="row">
-            <div class="col-12">
-                <div class="sentenceDisplay"></div>
                 <h5>Longest word in sentence: <p class="longestWord"> </p></h5> 
-                
             </div>
 
         </div>
-        <!-- <div class="row">
+        <div class="row">
             <div class="col-12">
                 <h4>Word Count: <div class="count"> </div></h4>
             </div>
 
-        </div> -->
-
-
+        </div>
 
     </div>
 
