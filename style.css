@@ -26,23 +26,22 @@ h1{
     border-radius: 8px;
 }
 
-.analyse {
+.analyse{
     background-color: white; 
     color: black; 
     border: 2px solid #eb80d9;
 }
   
-.analyse:hover {
+.analyse:hover{
     background-color: #eb80d9;
     color: black;
 }
-
 
 .longerThan5{
     display: none;
 }
 
-markLongest {
+markLongest{
     background-color: rgb(255, 0, 106);
     color: white;
 }

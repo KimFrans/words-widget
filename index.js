@@ -58,7 +58,6 @@ function getWords() {
     // }
     // longest.innerHTML = `<markLongest>${highlightedLong}</markLongest>`
     longest.innerHTML = `<markLongest>${longestWordArray}</markLongest>`
-
     
     //Checkbox
     if(checkBox.checked === true){
@@ -79,6 +78,7 @@ function getWords() {
         display.innerHTML = newSentence
     }
 
+    
     //Keep track of the last 5 sentences enetred
     if(lastEnteredSentenceArray.length < 5){
         if(!lastEnteredSentenceArray.includes(sentence)){
