@@ -27,6 +27,7 @@ function getWords() {
     })
     // console.log(highlightedSentence);
     
+    
     let newSentence = ""
     for(i=0; i<highlightedSentence.length; i++){
         newSentence+= highlightedSentence[i] + " " 
@@ -78,7 +79,7 @@ function getWords() {
         display.innerHTML = newSentence
     }
 
-    
+
     //Keep track of the last 5 sentences enetred
     if(lastEnteredSentenceArray.length < 5){
         if(!lastEnteredSentenceArray.includes(sentence)){
