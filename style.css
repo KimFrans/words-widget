@@ -1,14 +1,40 @@
 body{
     box-sizing: border-box;
-    /* background-image: url('./Word\ Widget\ \(6\).png') */
+    background-image: url('./Word\ Widget\ \(6\).png')
 } 
 
 h1{
-    /* color: white; */
+    color: white;
     font-style: oblique;
     font-family: 'Courier New', Courier, monospace;
     text-align: center;
     
+}
+
+.analyse{
+    background-color: #eb80d9;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+.analyse {
+    background-color: white; 
+    color: black; 
+    border: 2px solid #eb80d9;
+}
+  
+.analyse:hover {
+    background-color: #eb80d9;
+    color: black;
 }
 
 
@@ -23,7 +49,7 @@ markLongest {
 
 .last5sentences{
     width:295px;
-    height:100px;
+    height:165px;
     border:1px solid black;
     /* background: transparent; */
 }

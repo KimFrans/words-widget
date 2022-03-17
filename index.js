@@ -18,11 +18,8 @@ let lastEnteredSentenceArray = []
 
 function getWords() {
     const sentence = getSentence.value
-    // console.log(sentence);
 
     wordsArray = sentence.trim().split(" ");
-    // console.log(wordsArray);
-    // return wordsArray
     const highlightedSentence = wordsArray.map(word => {
         if (word.length > 4) 
         { return `<mark>${word}</mark>` }
@@ -50,7 +47,17 @@ function getWords() {
             longestInString = sentenceSplit[i];
         }
     }
-    longest.innerHTML = `<markLongest>${longestInString}</markLongest>`;
+    // longest.innerHTML = `<markLongest>${longestInString}</markLongest>`;
+    let longestWordArray = sentenceSplit.filter( (word) => {
+        return word.length == longestInString.length
+    })
+    console.log(longestWordArray);
+    // let highlightedLong = ""
+    // for(i=0; i<longestWordArray.length; i++){
+    //     highlightedLong+= longestWordArray[i] + " " 
+    // }
+    // longest.innerHTML = `<markLongest>${highlightedLong}</markLongest>`
+    longest.innerHTML = `<markLongest>${longestWordArray}</markLongest>`
 
     
     //Checkbox
@@ -73,15 +80,17 @@ function getWords() {
     }
 
     //Keep track of the last 5 sentences enetred
-    // if(lastEnteredSentenceArray.length < 5){
-    //     lastEnteredSentenceArray.push(sentence)
-    // }else{
-    //     lastEnteredSentenceArray.shift()
-    //     // return lastEnteredSentenceArray
-    // }
-    // console.log(lastEnteredSentenceArray);
-    // // displaySentence.innerHTML = userTemplate({sentence: lastEnteredSentenceArray})
-    // displaySentence.innerHTML = `${lastEnteredSentenceArray} `
+    if(lastEnteredSentenceArray.length < 5){
+        if(!lastEnteredSentenceArray.includes(sentence)){
+            lastEnteredSentenceArray.push(sentence)
+        }
+    }else{
+        lastEnteredSentenceArray.shift()
+        // return lastEnteredSentenceArray
+    }
+    console.log(lastEnteredSentenceArray);
+    // displaySentence.innerHTML = userTemplate({sentence: lastEnteredSentenceArray})
+    displaySentence.innerHTML = `${lastEnteredSentenceArray} `
 
     
 }
