@@ -1,38 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="simple-grid.css">
     <link rel="stylesheet" href="style.css">
     <title>Document</title>
+
+    <script type="text/x-template" class="templateName">
+        {{#each sentence}}
+        <li class="displaySentence">
+            
+        </li>
+        {{/each}}
+    </script>
 </head>
 <body>
 
     <div class="container">
-        <h1>Words widget</h1>
+        <div class="row">
+            <h1>Words Widget</h1>
+        </div>
         <div class="row">
             <div class="col-6">
                 <h4>Please enter a sentence</h4>
                 <!-- <input type="text" placeholder="enter a senternce.." class="input" onfocus="this.value=''"> -->
-                <textarea class="input" placeholder="enter a senternce.." onfocus="this.value=''" cols="30" rows="5"></textarea>
+                <textarea class="input" placeholder="enter a senternce.." onfocus="this.value=''" cols="45" rows="3"></textarea>
                 <button class="analyse">Analyse Sentence</button>
                 <div class="sentenceDisplay"></div>
                 <div class="lessthan5"> </div>
                 <input type="checkbox" class="hide" value="" onclick="getWords()"> Hide all words shorter than 5 characters
             </div>
             <div class="col-6">
-                <h5>Longest word in sentence: <p class="longestWord"> </p></h5> 
-            </div>
-
-        </div>
-        <div class="row">
-            <div class="col-12">
+                <h4>Longest word in sentence: <p class="longestWord"> </p></h4> 
                 <h4>Word Count: <div class="count"> </div></h4>
             </div>
 
         </div>
+        <div class="row">
+            <div class="col-11">
+                <div class="last5sentences" ></div>
+            </div>
+            <!-- <div class="col-6">
+                <h4>Word Count: <div class="count"> </div></h4>
+            </div> -->
+
+        </div>
+
+        <!-- <div class="row">
+            <div class="col-12">
+                <textarea class="last5sentences" cols="30" rows="5"></textarea>
+                <div class="last5sentences" ></div>
+            </div>
+        </div> -->
 
     </div>
 

@@ -6,8 +6,15 @@ const count = document.querySelector(".count");
 const checkBox = document.querySelector(".hide");
 const longerThan5 = document.querySelector(".longerThan5")
 const lessthan5 = document.querySelector(".lessthan5")
+const displaySentence = document.querySelector(".last5sentences");
+
+// get a reference to the template script tag
+var templateSource = document.querySelector(".templateName").innerHTML;
+// compile the template
+var userTemplate = Handlebars.compile(templateSource);
 
 let wordsArray = []
+let lastEnteredSentenceArray = []
 
 function getWords() {
     const sentence = getSentence.value
@@ -49,9 +56,10 @@ function getWords() {
     //Checkbox
     if(checkBox.checked === true){
         const wordsLongerThan5 = wordsArray.map(word => {
-            if (word.length > 5) {
-                return word
+            if (word.length >= 5) {
+                return `<mark>${word}</mark>` 
             }
+            // return word
             
         })
         let joinedArray = wordsLongerThan5.join(" ")
@@ -63,6 +71,17 @@ function getWords() {
         lessthan5.innerHTML = ""
         display.innerHTML = newSentence
     }
+
+    //Keep track of the last 5 sentences enetred
+    // if(lastEnteredSentenceArray.length < 5){
+    //     lastEnteredSentenceArray.push(sentence)
+    // }else{
+    //     lastEnteredSentenceArray.shift()
+    //     // return lastEnteredSentenceArray
+    // }
+    // console.log(lastEnteredSentenceArray);
+    // // displaySentence.innerHTML = userTemplate({sentence: lastEnteredSentenceArray})
+    // displaySentence.innerHTML = `${lastEnteredSentenceArray} `
 
     
 }

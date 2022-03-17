@@ -1,8 +1,16 @@
-/* body{
+body{
     box-sizing: border-box;
-    /* background-color: cornflowerblue; */
-    /* background-color: cornflowerblue; */
-/* } */ 
+    /* background-image: url('./Word\ Widget\ \(6\).png') */
+} 
+
+h1{
+    /* color: white; */
+    font-style: oblique;
+    font-family: 'Courier New', Courier, monospace;
+    text-align: center;
+    
+}
+
 
 .longerThan5{
     display: none;
@@ -11,5 +19,12 @@
 markLongest {
     background-color: rgb(255, 0, 106);
     color: white;
-  }
+}
+
+.last5sentences{
+    width:295px;
+    height:100px;
+    border:1px solid black;
+    /* background: transparent; */
+}
 
