@@ -7,6 +7,7 @@ const checkBox = document.querySelector(".hide");
 const longerThan5 = document.querySelector(".longerThan5")
 const lessthan5 = document.querySelector(".lessthan5")
 const displaySentence = document.querySelector(".last5sentences");
+const displayList = document.getElementById("display5");
 
 // get a reference to the template script tag
 var templateSource = document.querySelector(".templateName").innerHTML;
@@ -84,41 +85,42 @@ function getWords() {
     if(lastEnteredSentenceArray.length < 5){
         if(!lastEnteredSentenceArray.includes(sentence)){
             lastEnteredSentenceArray.push(sentence)
+            for(i=0; i<lastEnteredSentenceArray.length; i++){
+                var nodeExample = document.createElement("li")
+                var textNode = document.createTextNode(lastEnteredSentenceArray[i])
+                nodeExample.appendChild(textNode)  
+                // console.log(textNode);
+                // console.log(nodeExample);
+            }
+            document.getElementById("display5").appendChild(nodeExample)
         }
-    }else{
+    }  
+    else {
         lastEnteredSentenceArray.shift()
-        // return lastEnteredSentenceArray
+        // lastEnteredSentenceArray.push(sentence)
+        if(!lastEnteredSentenceArray.includes(sentence)){
+            lastEnteredSentenceArray.push(sentence)
+            console.log(lastEnteredSentenceArray);
+            // document.getElementById("display5") = ""
+            for(i=0; i<lastEnteredSentenceArray.length; i++){
+                var nodeExample = document.createElement("li")
+                var textNode = document.createTextNode(lastEnteredSentenceArray[i])
+                nodeExample.appendChild(textNode)  
+                // console.log(textNode);
+                // console.log(nodeExample);
+            }
+            // document.getElementById("display5").appendChild(nodeExample)
+            // displaySentence.innerHTML = lastEnteredSentenceArray.map(i => `<li>${i}</li>`).join('');
+            document.getElementById("display5").innerHTML = lastEnteredSentenceArray.map(i => `<li>${i}</li>`).join('');
+        }
     }
-    console.log(lastEnteredSentenceArray);
-    // displaySentence.innerHTML = userTemplate({sentence: lastEnteredSentenceArray})
-    displaySentence.innerHTML = `${lastEnteredSentenceArray} `
-
+    // console.log(lastEnteredSentenceArray);
     
 }
 analyseBtn.addEventListener('click', getWords)
 
-// function hideWords(){
-//     const sentence = getSentence.value
-//     // console.log(sentence);
 
-//     wordsArray = sentence.trim().split(" ");
-
-//     if(checkBox.checked === true){
-//         const wordsLongerThan5 = wordsArray.map(word => {
-//             if (word.length > 5) {
-//                 return word
-//             }
-            
-//         })
-//         let joinedArray = wordsLongerThan5.join(" ")
-//         // lessthan5.innerHTML = joinedArray 
-//         display.innerHTML = joinedArray
-    
-//     }else {
-//         // lessthan5.innerHTML = ""
-//         display.innerHTML = ""
-//     }
-
-// }
-// checkBox.addEventListener('click', hideWords)
-
+displayList.addEventListener('click', (event) => {
+    getSentence.value = event.target.innerHTML;
+    getWords()
+});
