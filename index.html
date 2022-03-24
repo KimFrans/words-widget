@@ -25,7 +25,12 @@
         </div>
         <div class="row">
             <div class="col-6">
+                <div class="slidecontainer">
+                    <input type="range" min="0" max="50" value="4" class="slider" id="myRange">
+                    <p>Value: <span id="demo"></span></p>
+                </div>
                 <h4>Please enter a sentence</h4>
+                <span class="dot"></span>
                 <!-- <input type="text" placeholder="enter a senternce.." class="input" onfocus="this.value=''"> -->
                 <textarea class="input" placeholder="enter a senternce.." onfocus="this.value=''" cols="43" rows="3"></textarea>
                 <button class="analyse">Analyse Sentence</button>

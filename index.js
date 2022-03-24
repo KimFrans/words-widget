@@ -8,113 +8,156 @@ const longerThan5 = document.querySelector(".longerThan5")
 const lessthan5 = document.querySelector(".lessthan5")
 const displaySentence = document.querySelector(".last5sentences");
 const displayList = document.getElementById("display5");
+const dot = document.querySelector(".dot")
+let wordsArray = []
+let lastEnteredSentenceArray = []
+
+var slider = document.getElementById("myRange");
+var output = document.getElementById("demo");
+output.innerHTML = slider.value;
+
+// const sliderVal = this.value
+
+slider.oninput = function() {
+    output.innerHTML = this.value;
+}
+
+if (localStorage['lastSentences']) {
+    lastEnteredSentenceArray = JSON.parse(localStorage.getItem('lastSentences'))
+    console.log("got Local storage");
+}
+for (i = 0; i < lastEnteredSentenceArray.length; i++) {
+    var nodeExample = document.createElement("li")
+    var textNode = document.createTextNode(lastEnteredSentenceArray[i])
+    nodeExample.appendChild(textNode)
+}
+document.getElementById("display5").innerHTML = lastEnteredSentenceArray.map(i => `<li>${i}</li>`).join('');
 
 // get a reference to the template script tag
 var templateSource = document.querySelector(".templateName").innerHTML;
 // compile the template
 var userTemplate = Handlebars.compile(templateSource);
 
-let wordsArray = []
-let lastEnteredSentenceArray = []
 
 function getWords() {
     const sentence = getSentence.value
-
+    const sliderValue = slider.value;
+    // sliderValue = this.value;
+    
+    
     wordsArray = sentence.trim().split(" ");
+    // const highlightedSentence = wordsArray.map(word => {
+        //     if (word.length > 4) { return `<mark>${word}</mark>` }
+        //     return word
+    // })
     const highlightedSentence = wordsArray.map(word => {
-        if (word.length > 4) 
-        { return `<mark>${word}</mark>` }
-            return word 
+        if(sliderValue != 0){
+            if (word.length >= sliderValue) 
+            { return `<mark>${word}</mark>` }
+            
+            return word
+
+        }else{
+            return `${word}`
+        }
     })
-    // console.log(highlightedSentence);
+    console.log(sliderValue);
     
-    
+
     let newSentence = ""
-    for(i=0; i<highlightedSentence.length; i++){
-        newSentence+= highlightedSentence[i] + " " 
+    for (i = 0; i < highlightedSentence.length; i++) {
+        newSentence += highlightedSentence[i] + " "
     }
-    
+
     //word Count display
     let wordCount = sentence.split(" ").length
     // console.log(wordCount);
     count.innerHTML = wordCount
-
+    
     //Longest word
     let sentenceSplit = sentence.split(' ');
     let longestWord = 0;
     let longestInString = ""
-    for(var i = 0; i < sentenceSplit.length; i++){
-        if(sentenceSplit[i].length > longestWord){
-	        longestWord = sentenceSplit[i].length;
+    for (var i = 0; i < sentenceSplit.length; i++) {
+        if (sentenceSplit[i].length > longestWord) {
+            longestWord = sentenceSplit[i].length;
             longestInString = sentenceSplit[i];
         }
     }
-    // longest.innerHTML = `<markLongest>${longestInString}</markLongest>`;
-    let longestWordArray = sentenceSplit.filter( (word) => {
+    let longestWordArray = sentenceSplit.filter((word) => {
         return word.length == longestInString.length
     })
     console.log(longestWordArray);
-    // let highlightedLong = ""
-    // for(i=0; i<longestWordArray.length; i++){
-    //     highlightedLong+= longestWordArray[i] + " " 
-    // }
-    // longest.innerHTML = `<markLongest>${highlightedLong}</markLongest>`
-    longest.innerHTML = `<markLongest>${longestWordArray}</markLongest>`
     
+    longest.innerHTML = `<markLongest>${longestWordArray}</markLongest>`
+
     //Checkbox
-    if(checkBox.checked === true){
+    if (checkBox.checked === true) {
         const wordsLongerThan5 = wordsArray.map(word => {
             if (word.length >= 5) {
-                return `<mark>${word}</mark>` 
+                return `<mark>${word}</mark>`
             }
-            // return word
-            
+
         })
-        let joinedArray = wordsLongerThan5.join(" ")
-        // lessthan5.innerHTML = joinedArray 
+        let joinedArray = wordsLongerThan5.join(" ") 
         display.innerHTML = " "
         lessthan5.innerHTML = joinedArray
-    
-    }else {
+
+    } else {
         lessthan5.innerHTML = ""
         display.innerHTML = newSentence
     }
 
 
     //Keep track of the last 5 sentences enetred
-    if(lastEnteredSentenceArray.length < 5){
-        if(!lastEnteredSentenceArray.includes(sentence)){
+    if (lastEnteredSentenceArray.length < 5) {
+        if (!lastEnteredSentenceArray.includes(sentence)) {
             lastEnteredSentenceArray.push(sentence)
-            for(i=0; i<lastEnteredSentenceArray.length; i++){
+            localStorage.setItem('lastSentences', JSON.stringify(lastEnteredSentenceArray))
+            for (i = 0; i < lastEnteredSentenceArray.length; i++) {
                 var nodeExample = document.createElement("li")
                 var textNode = document.createTextNode(lastEnteredSentenceArray[i])
-                nodeExample.appendChild(textNode)  
-                // console.log(textNode);
-                // console.log(nodeExample);
+                nodeExample.appendChild(textNode)
             }
             document.getElementById("display5").appendChild(nodeExample)
         }
-    }  
+    }
     else {
         lastEnteredSentenceArray.shift()
-        // lastEnteredSentenceArray.push(sentence)
-        if(!lastEnteredSentenceArray.includes(sentence)){
+        if (!lastEnteredSentenceArray.includes(sentence)) {
             lastEnteredSentenceArray.push(sentence)
+            localStorage.setItem('lastSentences', JSON.stringify(lastEnteredSentenceArray))
             console.log(lastEnteredSentenceArray);
-            // document.getElementById("display5") = ""
-            for(i=0; i<lastEnteredSentenceArray.length; i++){
+            for (i = 0; i < lastEnteredSentenceArray.length; i++) {
                 var nodeExample = document.createElement("li")
                 var textNode = document.createTextNode(lastEnteredSentenceArray[i])
-                nodeExample.appendChild(textNode)  
-                // console.log(textNode);
-                // console.log(nodeExample);
+                nodeExample.appendChild(textNode)
             }
-            // document.getElementById("display5").appendChild(nodeExample)
-            // displaySentence.innerHTML = lastEnteredSentenceArray.map(i => `<li>${i}</li>`).join('');
             document.getElementById("display5").innerHTML = lastEnteredSentenceArray.map(i => `<li>${i}</li>`).join('');
         }
     }
+    
     // console.log(lastEnteredSentenceArray);
+    const averageInput = sentence.split(" ").reduce((a, b) => a + b.length, 0)/sentence.split(" ").length
+    // const averageRound = averageInput.toFixed(2)
+    // console.log(averageInput);
+    const stringArray = lastEnteredSentenceArray.toString()
+    // console.log(stringArray);
+    const average = stringArray.split(" ").reduce((a, b) => a + b.length, 0)/stringArray.split(" ").length
+    const round = average.toFixed(2)
+    // console.log(round);
+    
+    if (averageInput > round) {
+        console.log("green");
+        dot.classList.remove("orange");
+        dot.classList.add("green");
+    }
+    else if (averageInput < round) {
+        console.log("orange");
+        dot.classList.remove("green");
+        dot.classList.add("orange");
+    }
+    
     
 }
 analyseBtn.addEventListener('click', getWords)
@@ -123,4 +166,7 @@ analyseBtn.addEventListener('click', getWords)
 displayList.addEventListener('click', (event) => {
     getSentence.value = event.target.innerHTML;
     getWords()
+
+    
+    
 });
