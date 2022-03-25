@@ -1,7 +1,6 @@
 const getSentence = document.querySelector(".input");
 const analyseBtn = document.querySelector(".analyse");
 const display = document.querySelector(".sentenceDisplay");
-const longest = document.querySelector(".longestWord")
 const count = document.querySelector(".count");
 const checkBox = document.querySelector(".hide");
 const longerThan5 = document.querySelector(".longerThan5")
@@ -9,8 +8,11 @@ const lessthan5 = document.querySelector(".lessthan5")
 const displaySentence = document.querySelector(".last5sentences");
 const displayList = document.getElementById("display5");
 const dot = document.querySelector(".dot")
+const error = document.querySelector(".error")
 let wordsArray = []
 let lastEnteredSentenceArray = []
+
+// const wordsFunction = WordWidget()
 
 var slider = document.getElementById("myRange");
 var output = document.getElementById("demo");
@@ -44,118 +46,126 @@ function getWords() {
     const sliderValue = slider.value;
     // sliderValue = this.value;
     
-    
-    wordsArray = sentence.trim().split(" ");
-    // const highlightedSentence = wordsArray.map(word => {
-        //     if (word.length > 4) { return `<mark>${word}</mark>` }
-        //     return word
-    // })
-    const highlightedSentence = wordsArray.map(word => {
-        if(sliderValue != 0){
-            if (word.length >= sliderValue) 
-            { return `<mark>${word}</mark>` }
-            
-            return word
+    if(sentence != ""){
+        wordsArray = sentence.trim().split(" ");
 
-        }else{
-            return `${word}`
-        }
-    })
-    console.log(sliderValue);
-    
-
-    let newSentence = ""
-    for (i = 0; i < highlightedSentence.length; i++) {
-        newSentence += highlightedSentence[i] + " "
-    }
-
-    //word Count display
-    let wordCount = sentence.split(" ").length
-    // console.log(wordCount);
-    count.innerHTML = wordCount
-    
-    //Longest word
-    let sentenceSplit = sentence.split(' ');
-    let longestWord = 0;
-    let longestInString = ""
-    for (var i = 0; i < sentenceSplit.length; i++) {
-        if (sentenceSplit[i].length > longestWord) {
-            longestWord = sentenceSplit[i].length;
-            longestInString = sentenceSplit[i];
-        }
-    }
-    let longestWordArray = sentenceSplit.filter((word) => {
-        return word.length == longestInString.length
-    })
-    console.log(longestWordArray);
-    
-    longest.innerHTML = `<markLongest>${longestWordArray}</markLongest>`
-
-    //Checkbox
-    if (checkBox.checked === true) {
-        const wordsLongerThan5 = wordsArray.map(word => {
-            if (word.length >= 5) {
-                return `<mark>${word}</mark>`
+        let sentenceSplit = sentence.split(' ');
+        let longestWord = 0;
+        let longestInString = ""
+        for (var i = 0; i < sentenceSplit.length; i++) {
+            if (sentenceSplit[i].length > longestWord) {
+                longestWord = sentenceSplit[i].length;
+                longestInString = sentenceSplit[i];
             }
-
+        }
+        let longestWordArray = sentenceSplit.filter((word) => {
+            return word.length == longestInString.length
         })
-        let joinedArray = wordsLongerThan5.join(" ") 
-        display.innerHTML = " "
-        lessthan5.innerHTML = joinedArray
-
-    } else {
-        lessthan5.innerHTML = ""
-        display.innerHTML = newSentence
-    }
-
-
-    //Keep track of the last 5 sentences enetred
-    if (lastEnteredSentenceArray.length < 5) {
-        if (!lastEnteredSentenceArray.includes(sentence)) {
-            lastEnteredSentenceArray.push(sentence)
-            localStorage.setItem('lastSentences', JSON.stringify(lastEnteredSentenceArray))
-            for (i = 0; i < lastEnteredSentenceArray.length; i++) {
-                var nodeExample = document.createElement("li")
-                var textNode = document.createTextNode(lastEnteredSentenceArray[i])
-                nodeExample.appendChild(textNode)
-            }
-            document.getElementById("display5").appendChild(nodeExample)
-        }
-    }
-    else {
-        lastEnteredSentenceArray.shift()
-        if (!lastEnteredSentenceArray.includes(sentence)) {
-            lastEnteredSentenceArray.push(sentence)
-            localStorage.setItem('lastSentences', JSON.stringify(lastEnteredSentenceArray))
-            console.log(lastEnteredSentenceArray);
-            for (i = 0; i < lastEnteredSentenceArray.length; i++) {
-                var nodeExample = document.createElement("li")
-                var textNode = document.createTextNode(lastEnteredSentenceArray[i])
-                nodeExample.appendChild(textNode)
-            }
-            document.getElementById("display5").innerHTML = lastEnteredSentenceArray.map(i => `<li>${i}</li>`).join('');
-        }
-    }
+        console.log(longestWordArray);
+        const highlightedSentence = wordsArray.map(word => {
+            if(sliderValue != 0){
+                if(word.length == longestInString.length){
+                    { return `<markLongest>${word}</markLongest>` }
+                }
+                else {
+                    if (word.length >= sliderValue) {
+                        { return `<mark>${word}</mark>` }
+                    }
+                }
+                return word
     
-    // console.log(lastEnteredSentenceArray);
-    const averageInput = sentence.split(" ").reduce((a, b) => a + b.length, 0)/sentence.split(" ").length
-    // const averageRound = averageInput.toFixed(2)
-    // console.log(averageInput);
-    const stringArray = lastEnteredSentenceArray.toString()
-    // console.log(stringArray);
-    const average = stringArray.split(" ").reduce((a, b) => a + b.length, 0)/stringArray.split(" ").length
-    const round = average.toFixed(2)
-    // console.log(round);
+            }else{
+                return `${word}`
+            }
+        })
+        console.log(sliderValue);
+        
     
-    if (averageInput > round) {
-        console.log("green");
-        dot.classList.remove("orange");
-        dot.classList.add("green");
-    }
-    else if (averageInput < round) {
-        console.log("orange");
-        dot.classList.remove("green");
-        dot.classList.add("orange");
+        let newSentence = ""
+        for (i = 0; i < highlightedSentence.length; i++) {
+            newSentence += highlightedSentence[i] + " "
+        }
+    
+        //word Count display
+        let wordCount = sentence.split(" ").length
+        // console.log(wordCount);
+        count.innerHTML = wordCount
+        
+    
+        //Checkbox
+        if (checkBox.checked === true) {
+            const wordsLongerThan5 = wordsArray.map(word => {
+                if (word.length >= 5 && word.length == longestInString.length) {
+                    return `<markLongest>${word}</markLongest>`
+                }else if(word.length >= 5){
+                   return  `<mark>${word}</mark>`
+                }
+    
+            })
+            let joinedArray = wordsLongerThan5.join(" ") 
+            display.innerHTML = " "
+            lessthan5.innerHTML = joinedArray
+    
+        } else {
+            lessthan5.innerHTML = ""
+            display.innerHTML = newSentence
+        }
+    
+    
+        //Keep track of the last 5 sentences enetred
+        if (lastEnteredSentenceArray.length < 5) {
+            if (!lastEnteredSentenceArray.includes(sentence)) {
+                lastEnteredSentenceArray.push(sentence)
+                localStorage.setItem('lastSentences', JSON.stringify(lastEnteredSentenceArray))
+                for (i = 0; i < lastEnteredSentenceArray.length; i++) {
+                    var nodeExample = document.createElement("li")
+                    var textNode = document.createTextNode(lastEnteredSentenceArray[i])
+                    nodeExample.appendChild(textNode)
+                }
+                document.getElementById("display5").appendChild(nodeExample)
+            }
+        }
+        else {
+            lastEnteredSentenceArray.shift()
+            if (!lastEnteredSentenceArray.includes(sentence)) {
+                lastEnteredSentenceArray.push(sentence)
+                localStorage.setItem('lastSentences', JSON.stringify(lastEnteredSentenceArray))
+                console.log(lastEnteredSentenceArray);
+                for (i = 0; i < lastEnteredSentenceArray.length; i++) {
+                    var nodeExample = document.createElement("li")
+                    var textNode = document.createTextNode(lastEnteredSentenceArray[i])
+                    nodeExample.appendChild(textNode)
+                }
+                document.getElementById("display5").innerHTML = lastEnteredSentenceArray.map(i => `<li>${i}</li>`).join('');
+            }
+        }
+    
+        // console.log(lastEnteredSentenceArray);
+        const averageInput = sentence.split(" ").reduce((a, b) => a + b.length, 0)/sentence.split(" ").length
+        // const averageRound = averageInput.toFixed(2)
+        // console.log(averageInput);
+        const stringArray = lastEnteredSentenceArray.toString()
+        // console.log(stringArray);
+        const average = stringArray.split(" ").reduce((a, b) => a + b.length, 0)/stringArray.split(" ").length
+        const round = average.toFixed(2)
+        // console.log(round);
+        
+        if (averageInput > round) {
+            console.log("green");
+            dot.classList.remove("orange");
+            dot.classList.add("green");
+        }
+        else if (averageInput < round) {
+            console.log("orange");
+            dot.classList.remove("green");
+            dot.classList.add("orange");
+        }
+
+    }else{
+        error.innerHTML = "Please enter a sentence!"
+        setTimeout(function () {
+            error.innerHTML = "";
+          }, 3000);
     }
     
     

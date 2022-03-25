@@ -25,28 +25,23 @@
         </div>
         <div class="row">
             <div class="col-6">
-                <div class="slidecontainer">
-                    <input type="range" min="0" max="50" value="4" class="slider" id="myRange">
-                    <p>Value: <span id="demo"></span></p>
-                </div>
                 <h4>Please enter a sentence</h4>
                 <span class="dot"></span>
-                <!-- <input type="text" placeholder="enter a senternce.." class="input" onfocus="this.value=''"> -->
+                <div class="error"></div>
                 <textarea class="input" placeholder="enter a senternce.." onfocus="this.value=''" cols="43" rows="3"></textarea>
+                <div class="slidecontainer">
+                    <input type="range" min="0" max="50" value="4" class="slider" id="myRange">
+                    <p>Slider Value: <span id="demo"></span></p>
+                </div>
                 <button class="analyse">Analyse Sentence</button>
                 <div class="sentenceDisplay"></div>
                 <div class="lessthan5"> </div>
                 <input type="checkbox" class="hide" value="" onclick="getWords()"> Hide all words shorter than 5 characters
             </div>
             <div class="col-6">
-                <h4>Longest word in sentence: <p class="longestWord"> </p></h4> 
-                <h4>Word Count: <div class="count"> </div></h4>
-            </div>
-
-        </div>
-        <div class="row">
-            <div class="col-11">
+                <h4>Word Count:  <span class="count"> </span></h4>
                 <div class="last5sentences" >
+                    <h4>Last 5 Sentences:</h4>
                     <ul id="display5">
             
                     </ul>
@@ -54,9 +49,15 @@
             </div>
 
         </div>
+        <!-- <div class="row">
+            <div class="col-11">
+            </div>
+
+        </div> -->
 
     </div>
 
+    <!-- <script src="./factory-function/word-factory.js"></script> -->
     <script src="index.js"></script>
     
 </body>
