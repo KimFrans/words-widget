@@ -31,7 +31,7 @@
                 <textarea class="input" placeholder="enter a senternce.." onfocus="this.value=''" cols="43" rows="3"></textarea>
                 <div class="slidecontainer">
                     <input type="range" min="0" max="50" value="4" class="slider" id="myRange">
-                    <p>Slider Value: <span id="demo"></span></p>
+                    Word length: <span id="demo"></span> characters
                 </div>
                 <button class="analyse">Analyse Sentence</button>
                 <div class="sentenceDisplay"></div>
@@ -49,11 +49,16 @@
             </div>
 
         </div>
-        <!-- <div class="row">
+        <div class="row">
             <div class="col-11">
+                <div class="key">Key:</div>
+                <div><mark>Yellow</mark> = words more than 4 letters</div>
+                <div><markLongest>Pink</markLongest> = the longest word</div>
+                <div><span class="dot1"></span> = If the latest sentence entered average word length is <span class="bold1">lower</span> than the last 5 sentences</div>
+                <div><span class="dot2"></span> = If the latest sentence entered average word length is <span class="bold2">higher</span> than the last 5 sentences</div>
             </div>
 
-        </div> -->
+        </div>
 
     </div>
 

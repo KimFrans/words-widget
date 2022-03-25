@@ -36,11 +36,12 @@ var templateSource = document.querySelector(".templateName").innerHTML;
 // compile the template
 var userTemplate = Handlebars.compile(templateSource);
 
+// const noPunctuation = word.replace(/[,.-]/g, '')
 
 function getWords() {
-    const sentence = getSentence.value
+    const gotSentence = getSentence.value
+    const sentence = gotSentence.replace(/[,.-]/g, '')
     const sliderValue = slider.value;
-    // sliderValue = this.value;
     
     if(sentence != ""){
         wordsArray = sentence.trim().split(" ");
@@ -84,9 +85,7 @@ function getWords() {
     
         //word Count display
         let wordCount = sentence.split(" ").length
-        // console.log(wordCount);
         count.innerHTML = wordCount
-        
     
         //Checkbox
         if (checkBox.checked === true) {
@@ -110,8 +109,8 @@ function getWords() {
     
         //Keep track of the last 5 sentences enetred
         if (lastEnteredSentenceArray.length < 5) {
-            if (!lastEnteredSentenceArray.includes(sentence)) {
-                lastEnteredSentenceArray.push(sentence)
+            if (!lastEnteredSentenceArray.includes(gotSentence)) {
+                lastEnteredSentenceArray.push(gotSentence)
                 localStorage.setItem('lastSentences', JSON.stringify(lastEnteredSentenceArray))
                 for (i = 0; i < lastEnteredSentenceArray.length; i++) {
                     var nodeExample = document.createElement("li")
@@ -123,8 +122,8 @@ function getWords() {
         }
         else {
             lastEnteredSentenceArray.shift()
-            if (!lastEnteredSentenceArray.includes(sentence)) {
-                lastEnteredSentenceArray.push(sentence)
+            if (!lastEnteredSentenceArray.includes(gotSentence)) {
+                lastEnteredSentenceArray.push(gotSentence)
                 localStorage.setItem('lastSentences', JSON.stringify(lastEnteredSentenceArray))
                 console.log(lastEnteredSentenceArray);
                 for (i = 0; i < lastEnteredSentenceArray.length; i++) {
@@ -135,16 +134,12 @@ function getWords() {
                 document.getElementById("display5").innerHTML = lastEnteredSentenceArray.map(i => `<li>${i}</li>`).join('');
             }
         }
-    
-        // console.log(lastEnteredSentenceArray);
+
+        //dot classes
         const averageInput = sentence.split(" ").reduce((a, b) => a + b.length, 0)/sentence.split(" ").length
-        // const averageRound = averageInput.toFixed(2)
-        // console.log(averageInput);
         const stringArray = lastEnteredSentenceArray.toString()
-        // console.log(stringArray);
         const average = stringArray.split(" ").reduce((a, b) => a + b.length, 0)/stringArray.split(" ").length
         const round = average.toFixed(2)
-        // console.log(round);
         
         if (averageInput > round) {
             console.log("green");
