@@ -12,13 +12,9 @@ const error = document.querySelector(".error")
 let wordsArray = []
 let lastEnteredSentenceArray = []
 
-// const wordsFunction = WordWidget()
-
 var slider = document.getElementById("myRange");
 var output = document.getElementById("demo");
 output.innerHTML = slider.value;
-
-// const sliderVal = this.value
 
 slider.oninput = function() {
     output.innerHTML = this.value;
@@ -165,7 +161,7 @@ function getWords() {
         error.innerHTML = "Please enter a sentence!"
         setTimeout(function () {
             error.innerHTML = "";
-          }, 3000);
+        }, 3000);
     }
     
     
@@ -176,7 +172,5 @@ analyseBtn.addEventListener('click', getWords)
 displayList.addEventListener('click', (event) => {
     getSentence.value = event.target.innerHTML;
     getWords()
-
-    
     
 });
